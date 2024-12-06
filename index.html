@@ -22,9 +22,14 @@
         }
 
         .header {
-            background-color: #f8f9fa;
-            padding: 15px 20px;
-            border-bottom: 2px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #b4c0c4;
+            color: rgb(102, 37, 37);
+            border-radius: 10px;
+            flex-wrap: wrap;
         }
 
         .logo h1 {
@@ -348,6 +353,7 @@
             <!-- Botões -->
             <nav class="menu">
                 <a href="/" class="btn btn-outline-primary">Home</a>
+                <a href="#retrospectiva" class="btn btn-outline-primary">Retrospectiva</a>
                 <a href="#metas" class="btn btn-outline-primary">Metas</a>
                 <a href="jogo.html" class="btn btn-outline-primary">Jogo</a>
             </nav>
@@ -461,6 +467,7 @@
 
         <br>
         <br>
+        <h2 class="text-center my-4" id="retrospectiva">Nossa retrospectiva</h2>
         <div class="retrospectiva d-flex justify-content-between">
             <div class="primeira-noite" onclick="openModal('modal-primeiraNoite')"
                 style="flex: 1; padding: 10px; text-align: center;">
@@ -557,8 +564,8 @@
     </div>
 
     <div class="metas" id="metas">
-        <h2 class="text-center my-4" >Nossas metas</h2>
-    
+        <h2 class="text-center my-4">Nossas metas</h2>
+
         <h2 class="text-center">Metas Pendentes</h2>
         <table id="tabelaMetas" style="display:none;">
             <thead>
@@ -572,7 +579,7 @@
             </thead>
             <tbody></tbody>
         </table>
-    
+
         <!-- Tabela de Metas Concluídas -->
         <h2 class="text-center" id="concluidasTitulo" style="display:none;">Metas Concluídas</h2>
         <table id="tabelaConcluidas" style="display:none;">
@@ -585,7 +592,7 @@
             </thead>
             <tbody></tbody>
         </table>
-    
+
         <!-- Formulário para adicionar nova meta -->
         <div class="formulario-metas">
             <input type="text" id="nomeMeta" placeholder="Nome da Meta">
@@ -594,7 +601,7 @@
             <input type="date" id="dataFimMeta">
             <button onclick="adicionarMeta()">Adicionar Meta</button>
         </div>
-</div>
+    </div>
     <script src="js/contador.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/metas.js"></script>
