@@ -3,9 +3,9 @@ function mostrarJogoDados() {
     const botaoJogar = document.getElementById('botaoJogar');
     const botaoEsconder = document.getElementById('botaoEsconder');
 
-    jogoDados.style.display = 'flex'; // Mostra o jogo
+    jogoDados.style.display = 'flex'; // Exibe o jogo de dados
     botaoJogar.style.display = 'none'; // Esconde o botão "Iniciar Jogo"
-    botaoEsconder.style.display = 'inline-block'; // Mostra o botão "Esconder Jogo"
+    botaoEsconder.style.display = 'inline-block'; // Exibe o botão "Esconder Jogo"
 }
 
 function esconderJogoDados() {
@@ -13,19 +13,10 @@ function esconderJogoDados() {
     const botaoJogar = document.getElementById('botaoJogar');
     const botaoEsconder = document.getElementById('botaoEsconder');
 
-    jogoDados.style.display = 'none'; // Esconde o jogo
-    botaoJogar.style.display = 'inline-block'; // Mostra o botão "Iniciar Jogo"
+    jogoDados.style.display = 'none'; // Esconde o jogo de dados
+    botaoJogar.style.display = 'inline-block'; // Exibe o botão "Iniciar Jogo"
     botaoEsconder.style.display = 'none'; // Esconde o botão "Esconder Jogo"
 }
-
-function rolarDado(id) {
-    const dado = document.getElementById(id);
-    const faces = dado.children;
-    const resultado = Math.floor(Math.random() * faces.length); // Escolhe um número entre 0 e o número de faces
-    alert(`O resultado do dado ${id} foi: ${faces[resultado].innerText}`);
-}
-
-
 
 function rolarDado(dadoId) {
     const dado = document.getElementById(dadoId);
@@ -33,7 +24,7 @@ function rolarDado(dadoId) {
     // Gerar um valor aleatório entre 1 e 6
     const numero = Math.floor(Math.random() * 6) + 1;
 
-    // Definir a rotação correta para a face exibindo o número
+    // Definir a rotação para a face exibindo o número
     let rotationX = 0;
     let rotationY = 0;
 
@@ -64,13 +55,10 @@ function rolarDado(dadoId) {
             break;
     }
 
-    // Resetar o dado para a posição inicial
-    dado.style.transition = 'none'; // Remover transição para reiniciar rotação instantaneamente
-    dado.style.transform = `rotateX(0deg) rotateY(0deg)`; // Reseta para a posição inicial
+    // Aplicar a rotação 3D
+    dado.style.transition = 'transform 1s ease'; // Definir a animação suave de rotação
+    dado.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`; // Aplica a rotação baseada no número sorteado
 
-    // Forçar a reanimação com a rotação final (sem transição)
-    setTimeout(() => {
-        dado.style.transition = 'transform 0.6s'; // Aplicar novamente a transição suave
-        dado.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`; // Gira o dado de forma controlada
-    }, 10);
+    // Exibir o número sorteado como mensagem
+    alert(`O número sorteado foi: ${numero}`);
 }
