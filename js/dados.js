@@ -19,48 +19,32 @@ function esconderJogoDados() {
 }
 
 function rolarDado(dadoId) {
-    const dado = document.getElementById(dadoId);
+    // Dados com valores predefinidos
+    const valoresParte = ["Boca", "Pescoço", "Escolha", "Mão", "Peito", "Orelha"];
+    const valoresAcao = ["Beijar", "Lamber", "Chupar", "Tocar", "Gelo", "Escolha"];
+    const valoresTempo = ["30 segundos", "2 minutos", "1 minuto", "45 segundos", "5 minutos", "10 minutos"];
 
-    // Gerar um valor aleatório entre 1 e 6
-    const numero = Math.floor(Math.random() * 6) + 1;
+    let valores; // Variável para armazenar os valores corretos com base no dado
 
-    // Definir rotação para cada número
-    let rotationX, rotationY;
-
-    switch (numero) {
-        case 1:
-            rotationX = 0;
-            rotationY = 0;
-            break;
-        case 2:
-            rotationX = 0;
-            rotationY = 90;
-            break;
-        case 3:
-            rotationX = 0;
-            rotationY = 180;
-            break;
-        case 4:
-            rotationX = 0;
-            rotationY = -90;
-            break;
-        case 5:
-            rotationX = 90;
-            rotationY = 0;
-            break;
-        case 6:
-            rotationX = -90;
-            rotationY = 0;
-            break;
+    // Selecionar os valores de acordo com o ID do dado
+    if (dadoId === "dadoParte") {
+        valores = valoresParte;
+    } else if (dadoId === "dadoAcao") {
+        valores = valoresAcao;
+    } else if (dadoId === "dadoTempo") {
+        valores = valoresTempo;
     }
 
-    // Aplicar a rotação 3D com animação
-    dado.style.transition = 'transform 1s ease';
-    dado.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+    // Escolher aleatoriamente um valor
+    const numeroSorteado = Math.floor(Math.random() * 6); // Índice aleatório de 0 a 5
+    const valorSorteado = valores[numeroSorteado]; // Selecionar o valor
 
-    // Exibir o número sorteado após a rotação
-    setTimeout(() => {
-        alert(`O valor sorteado foi: ${numero}`);
-    }, 1000);
+    // Atualizar o texto do dado com o valor sorteado
+    const dado = document.getElementById(dadoId);
+    dado.textContent = valorSorteado;
+
+    // Opcional: Exibir o valor sorteado em um alerta
+    alert(`O valor sorteado foi: ${valorSorteado}`);
 }
+
 
