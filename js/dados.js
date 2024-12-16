@@ -19,35 +19,41 @@ function esconderJogoDados() {
 }
 
 function rolarDado(dadoId) {
-    // Valores predefinidos para cada tipo de dado
+    // Dados com valores predefinidos
     const valoresParte = ["Boca", "Pescoço", "Escolha", "Mão", "Peito", "Orelha"];
     const valoresAcao = ["Beijar", "Lamber", "Chupar", "Tocar", "Gelo", "Escolha"];
     const valoresTempo = ["30 segundos", "2 minutos", "1 minuto", "45 segundos", "5 minutos", "10 minutos"];
 
     let valores; // Variável para armazenar os valores corretos com base no dado
 
-    // Determinar os valores adequados ao dado clicado
+    // Selecionar os valores de acordo com o ID do dado
     if (dadoId === "dadoParte") {
         valores = valoresParte;
     } else if (dadoId === "dadoAcao") {
         valores = valoresAcao;
     } else if (dadoId === "dadoTempo") {
         valores = valoresTempo;
+    } else {
+        console.error("ID do dado inválido:", dadoId);
+        return; // Encerra a função se o ID for inválido
     }
 
-    // Escolher um índice aleatório entre 0 e 5
-    const numeroSorteado = Math.floor(Math.random() * 6);
+    // Escolher aleatoriamente um valor
+    const numeroSorteado = Math.floor(Math.random() * valores.length); // Índice aleatório
+    const valorSorteado = valores[numeroSorteado]; // Selecionar o valor correspondente
 
-    // Selecionar o valor correspondente
-    const valorSorteado = valores[numeroSorteado];
-
-    // Atualizar o texto do dado
+    // Atualizar o texto do dado com o valor sorteado
     const dado = document.getElementById(dadoId);
-    dado.innerText = valorSorteado; // Atualiza o conteúdo de texto do dado
+    if (dado) {
+        dado.textContent = valorSorteado; // Atualiza o texto do elemento
+    } else {
+        console.error("Elemento não encontrado para o ID:", dadoId);
+    }
 
     // Exibir o valor sorteado em um alerta (opcional)
     alert(`O valor sorteado foi: ${valorSorteado}`);
 }
+
 
 
 
