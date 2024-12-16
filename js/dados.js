@@ -24,41 +24,16 @@ function rolarDado(dadoId) {
     // Gerar um valor aleatório entre 1 e 6
     const numero = Math.floor(Math.random() * 6) + 1;
 
-    // Definir a rotação para a face exibindo o número
-    let rotationX = 0;
-    let rotationY = 0;
+    // Geração de ângulos de rotação para simular o giro
+    const rotationX = Math.floor(Math.random() * 360) + numero * 60;
+    const rotationY = Math.floor(Math.random() * 360) + numero * 60;
 
-    switch (numero) {
-        case 1:
-            rotationX = 0;
-            rotationY = 0;
-            break;
-        case 2:
-            rotationX = 0;
-            rotationY = 90;
-            break;
-        case 3:
-            rotationX = 0;
-            rotationY = 180;
-            break;
-        case 4:
-            rotationX = 0;
-            rotationY = 270;
-            break;
-        case 5:
-            rotationX = 90;
-            rotationY = 0;
-            break;
-        case 6:
-            rotationX = -90;
-            rotationY = 0;
-            break;
-    }
+    // Aplicar a rotação com animação
+    dado.style.transition = 'transform 1s ease';
+    dado.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
 
-    // Aplicar a rotação 3D
-    dado.style.transition = 'transform 1s ease'; // Definir a animação suave de rotação
-    dado.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`; // Aplica a rotação baseada no número sorteado
-
-    // Exibir o número sorteado como mensagem
-    alert(`O número sorteado foi: ${numero}`);
+    // Exibir o número sorteado após o término da animação
+    setTimeout(() => {
+        alert(`O número sorteado foi: ${numero}`);
+    }, 1000); // Aguarda 1 segundo para o término da animação
 }
