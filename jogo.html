@@ -113,26 +113,6 @@
     transform: rotateX(0deg) rotateY(0deg);
 }
 
-.face {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.face-1 { transform: rotateY(0deg) translateZ(50px); }
-.face-2 { transform: rotateY(90deg) translateZ(50px); }
-.face-3 { transform: rotateY(180deg) translateZ(50px); }
-.face-4 { transform: rotateY(-90deg) translateZ(50px); }
-.face-5 { transform: rotateX(90deg) translateZ(50px); }
-.face-6 { transform: rotateX(-90deg) translateZ(50px); }
-
 .botaoJogo {
     margin-top: 10px;
     padding: 10px;
@@ -212,47 +192,26 @@ button:hover {
     </header>
 
     <br>
-    <h2>Jogo dos Dados</h2>
+       <h2>Jogo dos Dados</h2>
     <button id="botaoJogar" onclick="mostrarJogoDados()">Iniciar Jogo</button>
     <button id="botaoEsconder" style="display: none;" onclick="esconderJogoDados()">Esconder Jogo</button>
     
-    <div class="jogoDados" id="jogoDados" style="display: none;">
+    <div class="jogoDados" id="jogoDados">
         <!-- Dado Parte -->
         <div class="dado-container">
-            <div class="dado" id="dadoParte">
-                <div class="face face-1">boca</div>
-                <div class="face face-2">pescoço</div>
-                <div class="face face-3">escolha</div>
-                <div class="face face-4">mão</div>
-                <div class="face face-5">peito</div>
-                <div class="face face-6">orelha</div>
-            </div>
+            <div class="dado" id="dadoParte">Boca</div>
             <button class="botaoJogo" onclick="rolarDado('dadoParte')">Parte</button>
         </div>
     
         <!-- Dado Ação -->
         <div class="dado-container">
-            <div class="dado" id="dadoAcao">
-                <div class="face face-1">beijar</div>
-                <div class="face face-2">lamber</div>
-                <div class="face face-3">chupar</div>
-                <div class="face face-4">tocar</div>
-                <div class="face face-5">gelo</div>
-                <div class="face face-6">escolha</div>
-            </div>
+            <div class="dado" id="dadoAcao">Beijar</div>
             <button class="botaoJogo" onclick="rolarDado('dadoAcao')">Ação</button>
         </div>
     
         <!-- Dado Tempo -->
         <div class="dado-container">
-            <div class="dado" id="dadoTempo">
-                <div class="face face-1">30 segundos</div>
-                <div class="face face-2">2 minutos</div>
-                <div class="face face-3">1 minuto</div>
-                <div class="face face-4">45 segundos</div>
-                <div class="face face-5">5 minutos</div>
-                <div class="face face-6">10 minutos</div>
-            </div>
+            <div class="dado" id="dadoTempo">30 segundos</div>
             <button class="botaoJogo" onclick="rolarDado('dadoTempo')">Tempo</button>
         </div>
     </div>
