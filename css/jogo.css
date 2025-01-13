@@ -1,0 +1,278 @@
+body {
+    display: flex;
+    margin: 0;
+    background-color: #f0f0f0;
+    align-items: flex-start;
+    text-align: center;
+    flex-direction: column;
+    min-height: 100vh;  /* Garante que a página ocupe ao menos 100% da altura da tela */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #b4c0c4;
+    color: rgb(102, 37, 37);
+    border-radius: 10px;
+}
+/* Nome do site e emoji */
+.logo h1 {
+    display: flex;
+    align-items: center;
+}
+
+.logo span {
+    margin-left: 10px; /* Espaçamento entre o nome e o emoji */
+}
+
+/* Menu de navegação */
+.menu {
+    display: flex;
+}
+
+.menu .button {
+    text-decoration: none;
+    color: white;
+    background-color: #1f8181;
+    padding: 10px 20px;
+    margin-left: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.container {
+    width: 90vw;
+    min-height: 100vh;
+    margin: 20px auto;
+    border-radius: 20px;
+    background-color: rgb(205, 247, 213);
+    padding: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.jogoDados {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.dado-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dado {
+    position: relative;
+    width: 120px; /* Ajusta o tamanho do dado para que ele não ultrapasse os botões */
+    height: 120px;
+    margin-bottom: 10px; /* Espaço entre o dado e o botão */
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(45deg);
+    display: inline-block;
+    transition: transform 0.6s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.face {
+    position: absolute;
+    width: 120px; /* Ajuste da largura das faces para corresponder ao tamanho do dado */
+    height: 120px;
+    background-color: #fff;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem; /* Ajuste do tamanho da fonte */
+    color: #333;
+    font-weight: bold;
+}
+
+.face-1 {
+    transform: rotateY(  0deg) translateZ(60px);
+}
+
+.face-2 {
+    transform: rotateY( 90deg) translateZ(60px);
+}
+
+.face-3 {
+    transform: rotateY(180deg) translateZ(60px);
+}
+
+.face-4 {
+    transform: rotateY(270deg) translateZ(60px);
+}
+
+.face-5 {
+    transform: rotateX( 90deg) translateZ(60px);
+}
+
+.face-6 {
+    transform: rotateX(-90deg) translateZ(60px);
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.botaoJogo {
+    margin-top: 40px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px; 
+}
+
+#tarefaTexto {
+    font-size: 18px;
+    margin: 20px;
+    font-weight: bold;
+}
+
+#tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    gap: 5px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.casa {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.azul {
+    background-color: blue;
+}
+
+.vermelha {
+    background-color: red;
+}
+
+.jogador {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+#acoes {
+    margin-top: 20px;
+}
+
+#fazer, #desistir {
+    margin: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Estilização do cronômetro */
+#cronometro {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    display: none;
+    background-color: #f9f9f9;
+}
+
+/* Estiliza o título do cronômetro */
+#cronometro h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Estiliza os campos de entrada para minutos e segundos */
+#cronometro label {
+    font-size: 18px;
+    color: #555;
+    margin-right: 10px;
+}
+
+#cronometro input {
+    padding: 8px;
+    font-size: 18px;
+    width: 100px;
+    margin: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#cronometro input:focus {
+    border-color: #4CAF50;
+}
+
+/* Estiliza os botões */
+#cronometro button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#cronometro button:hover {
+    background-color: #45a049;
+}
+
+/* Estiliza o tempo restante */
+#tempoRestante {
+    font-size: 20px;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Estiliza o botão para mostrar/ocultar o cronômetro */
+#mostrarCronometroBtn {
+    font-size: 18px;
+    padding: 10px 15px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#mostrarCronometroBtn:hover {
+    background-color: #007B9E;
+}
+

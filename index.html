@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>365 dias</title>
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            /* Preenche toda a altura da tela */
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #b4c0c4;
+            color: rgb(102, 37, 37);
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .logo span {
+            color: red;
+        }
+
+        .button {
+            margin-right: 10px;
+        }
+
+        .imagem-memoria {
+            max-width: 100%;
+            height: auto;
+            margin: 10px;
+        }
+
+        .homenagem p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .contador-inicio,
+        .contador-namoro {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .photo-gallery img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        .retrospectiva {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .metas input,
+        .metas button {
+            margin: 5px 0;
+        }
+
+        .imagem-memoria {
+            width: 150px;
+            /* Define o tamanho inicial */
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+            /* Suaviza o efeito */
+            cursor: pointer;
+        }
+
+        .imagem-memoria:hover,
+        .imagem-memoria:focus {
+            transform: scale(1.1);
+            /* Aumenta a imagem ao passar o mouse */
+        }
+
+        .item {
+            font-size: 1.2rem;
+            /* Ajusta o tamanho do texto */
+            font-weight: bold;
+            padding: 10px;
+            border: 2px solid #ddd;
+            /* Borda ao redor dos contadores */
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            /* Fundo claro */
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+            /* Efeito de zoom ao passar o mouse */
+        }
+
+        .label {
+            font-weight: normal;
+            color: #555;
+            /* Cor do texto da label */
+        }
+
+        /* Estilos para o botão de expansão */
+        .collapse {
+            margin-top: 20px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            /* Inicialmente, as modais são invisíveis */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Fundo semitransparente */
+            z-index: 1000;
+            overflow-y: auto;
+            /* Permite rolagem caso o conteúdo seja grande */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            /* Modal ocupa 90% da largura da tela */
+            max-width: 1000px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .photo-gallery {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .photo-gallery img {
+            width: 32%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+            /* Aumenta as imagens quando passa o mouse */
+        }
+
+        /* Responsividade para telas pequenas */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+            }
+
+            .photo-gallery img {
+                width: 48%;
+            }
+        }
+
+        .retrospectiva {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: nowrap;
+        }
+
+        .imagem-retrospectiva {
+            width: 350px;
+            /* Largura fixa */
+            height: 400px;
+            /* Altura fixa */
+            object-fit: cover;
+            /* Manter a proporção da imagem sem distorcer */
+            border-radius: 20px;
+            transition: transform 0.3s ease-in-out;
+            padding: 10px;
+        }
+
+        .imagem-retrospectiva:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            .retrospectiva {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .imagem-retrospectiva {
+                max-width: 90%;
+                margin-bottom: 15px;
+            }
+        }
+
+        .metas {
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .metas h2 {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .formulario-metas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .formulario-metas input,
+        .formulario-metas button {
+            padding: 10px;
+            font-size: 1em;
+            margin: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .metas h2 {
+                font-size: 1.2em;
+            }
+
+            .formulario-metas {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .formulario-metas input,
+            .formulario-metas button {
+                width: 100%;
+            }
+
+            table th,
+            table td {
+                padding: 8px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 480px) {
+            .metas {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .formulario-metas input,
+            .formulario-metas button {
+                font-size: 0.9em;
+            }
+
+            table th,
+            table td {
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class=corpo>
+        <!-- Cabeçalho -->
+        <header class="header d-flex justify-content-between align-items-center">
+            <!-- Nome do site e emoji -->
+            <div class="logo">
+                <h1>365 Dias <span>❤️</span></h1>
+            </div>
+
+            <!-- Botões -->
+            <nav class="menu">
+                <a href="/" class="btn btn-outline-primary">Home</a>
+                <a href="#retrospectiva" class="btn btn-outline-primary">Retrospectiva</a>
+                <a href="#metas" class="btn btn-outline-primary">Metas</a>
+                <a href="jogo.html" class="btn btn-outline-primary">Jogo</a>
+            </nav>
+        </header>
+
+        <div class="parte-1 text-center mt-4">
+            <h1>Amanda & Vinícius</h1>
+            <div class="memorias d-flex justify-content-center flex-wrap gap-3">
+                <img class="imagem-memoria img-fluid" src="./images/cabecalho/aniversário-amigo.JPEG"
+                    alt="Imagem de casal em um bar">
+                <img class="imagem-memoria img-fluid" src="./images/cabecalho/avenida-europa.JPEG"
+                    alt="Imagem de um casal na Av. Europa">
+                <img class="imagem-memoria img-fluid" src="./images/cabecalho/centro-cultural.JPEG"
+                    alt="Imagem de um casal se beijando no centro cultural">
+                <img class="imagem-memoria img-fluid" src="./images/cabecalho/santander.JPEG"
+                    alt="Imagem de um casal no topo do santander">
+            </div>
+            <div class="homenagem mt-4">
+                <p>
+                    Hoje completamos 365 dias desde que tudo começou! <br>
+                    Lembro como se fosse ontem quando você passou por aquela porta, me olhou, me deu um oi mais
+                    extrovertido enquanto eu estava ansiosa, nervosa, apreensiva e introvertida!<br>
+                    Sabe, de lá pra cá tanta coisa mudou, tanta coisa aconteceu, até chegar o dia de ser finalmente sua!
+                    <br>
+                    Hoje, em homenagem a nós, te dedico esse site, feito com muito carinho, para contar um pouquinho da
+                    nossa história!<br>
+                    Espero que aproveite e nunca se esqueça, eu te amo com todo meu ser e te dedico todo o meu
+                    coração!<br>
+                    Sua eterna namorada <span>💛</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="parte-2 py-5">
+            <h2 class="text-center mb-4">Desde que tudo começou...</h2>
+            <div class="contador-inicio row text-center g-4">
+                <!-- Contadores -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="item">
+                        <span class="label d-block">Anos:</span>
+                        <span id="anos" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="item">
+                        <span class="label d-block">Meses:</span>
+                        <span id="meses" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="item">
+                        <span class="label d-block">Semanas:</span>
+                        <span id="semanas" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="item">
+                        <span class="label d-block">Dias:</span>
+                        <span id="dias" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="item">
+                        <span class="label d-block">Horas:</span>
+                        <span id="horas" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="item">
+                        <span class="label d-block">Minutos:</span>
+                        <span id="minutos" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="item">
+                        <span class="label d-block">Segundos:</span>
+                        <span id="segundos" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="item">
+                        <span class="label d-block">Milissegundos:</span>
+                        <span id="milissegundos" class="valor">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-center my-4">Nosso namoro...</h2>
+            <div class="contador-namoro row text-center g-4">
+                <!-- Contadores -->
+                <div class="col-6 col-md-4">
+                    <div class="item">
+                        <span class="label d-block">Meses:</span>
+                        <span id="meses-namoro" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="item">
+                        <span class="label d-block">Semanas:</span>
+                        <span id="semanas-namoro" class="valor">0</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="item">
+                        <span class="label d-block">Dias:</span>
+                        <span id="dias-namoro" class="valor">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <h2 class="text-center my-4" id="retrospectiva">Nossa retrospectiva</h2>
+        <div class="retrospectiva d-flex justify-content-between">
+            <div class="primeira-noite" onclick="openModal('modal-primeiraNoite')"
+                style="flex: 1; padding: 10px; text-align: center;">
+                <img src="images/primeiraNoite/primeira-noite.JPEG" alt="Primeira Noite" class="imagem-retrospectiva">
+                <h3>Primeira Noite</h3>
+            </div>
+            <div class="show-luan" onclick="openModal('modal-showLuan')"
+                style="flex: 1; padding: 10px; text-align: center;">
+                <img src="images/show/show-luan.JPEG" alt="Show Luan" class="imagem-retrospectiva">
+                <h3>Show Luan</h3>
+            </div>
+            <div class="pedido-namoro" onclick="openModal('modal-pedidoNamoro')"
+                style="flex: 1; padding: 10px; text-align: center;">
+                <img src="images/pedidoNamoro/pedido-namoro.JPEG" alt="Pedido de Namoro" class="imagem-retrospectiva">
+                <h3>Pedido de Namoro</h3>
+            </div>
+        </div>
+
+        <!-- Modal Primeira Noite -->
+        <div id="modal-primeiraNoite" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal-primeiraNoite')">&times;</span>
+                <h2>Primeira Noite</h2>
+                <p>O que falar deste dia?<br>
+                    Lembro que pensamos muito sobre como e quando seria este dia, você ansioso, insistindo um pouco, e
+                    eu com medo! <br>
+                    Medo de que você seria mais um daqueles que faz o que quer e depois vai embora, mas depois de muito
+                    pensar, <br>
+                    decidi confiar, decidi me entregar! <br>
+                    Que bom que eu escolhi isso, porque você me entregou uma das noites mais românticas, apaixonadas e
+                    <br>
+                    especiais da minha vida! Obrigada, nada seria o mesmo sem a sua paciência, o seu coração gigante
+                    <br>
+                    e o seu amor! Sou completamente apaixonada por você e jamais esquecerei daquele dia!
+                </p>
+                <div class="photo-gallery">
+                    <img src="images/primeiraNoite/foto-espelho.JPEG" alt="Galeria de Imagens">
+                    <img src="images/primeiraNoite/foto-janela.JPEG" alt="Galeria de Imagens">
+                    <img src="images/primeiraNoite/foto-café.JPEG" alt="Galeria de Imagens">
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Show Luan -->
+        <div id="modal-showLuan" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal-showLuan')">&times;</span>
+                <h2>Show Luan</h2>
+                <p>Ahh esse show...<br>
+                    Sei que tivémos algumas DRs por conta desse dia, mas tirando a parte ruim, <br>
+                    foi um dos eventos mais importantes que pude ir contigo! Ir nesse show não foi apenas <br>
+                    ficar perto de um dos meus ídolos com você! Foi enfrentar minha família, foi ir para longe e viver
+                    <br>
+                    sem medo, por saber que você estava alí comigo! Foi voltar pra casa com você, mesmo apreensiva com
+                    uma outra questão <br>
+                    e dormir no aconchego dos seus braços! Acho que esse dia me marcou por tantas questões que não
+                    poderia estar fora dessa retrospectiva!
+                </p>
+                <div class="photo-gallery">
+                    <img src="images/show/foto-rodeio.JPEG" alt="Galeria de Imagens">
+                    <img src="images/show/foto-show.JPEG" alt="Galeria de Imagens">
+                    <img src="images/show/foto-casa-show.JPEG" alt="Galeria de Imagens">
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pedido Namoro -->
+        <div id="modal-pedidoNamoro" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal-pedidoNamoro')">&times;</span>
+                <h2>Pedido de Namoro</h2>
+                <p>Nosso namoro!!😍😍 <br>
+                    Que dia foi esse! Já tinha insistido tanto para ficarmos juntos, já tinhamos brigado<br>
+                    por questões que não vem ao caso, mas que balançaram nosso relacionamento, que a essa altura, achei
+                    que o pedido não viria mais... <br>
+                    Mas como sempre, você sempre me surpreendendo né! Me levou pra jantar, num restaurante que segundo
+                    você é minha cara, por ser mais vazio, mais chique... <br>
+                    Ainda não entendeu que não interessa aonde a gente esteja, se eu tiver com você eu to completa! <br>
+                    Sorrateiramente, insistindo para eu ir ao banheiro para você conseguir pegar as alianças sem eu
+                    perceber, me pediu em namoro alí, onde só tinha eu e você e pouco importava o resto!<br>
+                    Dormimos juntos nesse dia, e que noite especial! Só confirmou o quão apaixonada eu sou por você e
+                    por nós dois juntos!<br>
+                    Você me faz ser uma pessoa melhor e eu amo isso em você, amo dividir minha vida com você!<br>
+                    EU TE AMO💛</p>
+                <div class="photo-gallery">
+                    <img src="images/pedidoNamoro/alianca.JPEG" alt="Galeria de Imagens">
+                    <img src="images/pedidoNamoro/foto-saindo.JPEG" alt="Galeria de Imagens">
+                    <img src="images/pedidoNamoro/foto-piscina.JPEG" alt="Galeria de Imagens">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="metas" id="metas">
+        <h2 class="text-center my-4">Nossas metas</h2>
+
+        <h2 class="text-center">Metas Pendentes</h2>
+        <table id="tabelaMetas" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data Início</th>
+                    <th>Data Fim</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- Tabela de Metas Concluídas -->
+        <h2 class="text-center" id="concluidasTitulo" style="display:none;">Metas Concluídas</h2>
+        <table id="tabelaConcluidas" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data Conclusão</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- Formulário para adicionar nova meta -->
+        <div class="formulario-metas">
+            <input type="text" id="nomeMeta" placeholder="Nome da Meta">
+            <input type="text" id="descricaoMeta" placeholder="Descrição da Meta">
+            <input type="date" id="dataInicioMeta">
+            <input type="date" id="dataFimMeta">
+            <button onclick="adicionarMeta()">Adicionar Meta</button>
+        </div>
+    </div>
+    <script src="js/contador.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/metas.js"></script>
+</body>
+
+</html>
