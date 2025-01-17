@@ -14,12 +14,12 @@ setInterval(() => {
     const totalHoras = Math.floor(totalMinutos / 60);
     const horas = totalHoras % 24;
 
-    // Calcula dias, meses e anos manualmente
+    // Calcula os anos, meses e dias passados
     let anos = agora.getFullYear() - dataInicial.getFullYear();
     let meses = agora.getMonth() - dataInicial.getMonth();
     let dias = agora.getDate() - dataInicial.getDate();
 
-    // Ajusta os dias, meses e anos
+    // Ajusta meses e dias para casos negativos
     if (dias < 0) {
         meses -= 1;
         const ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
