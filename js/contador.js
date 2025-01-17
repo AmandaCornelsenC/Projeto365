@@ -12,31 +12,33 @@ setInterval(() => {
 
     const diasTotais = Math.floor(diferença / (1000 * 60 * 60 * 24)); // Total de dias
 
-    // Calculando anos e meses
+    // Calculando anos
     const anos = agora.getFullYear() - dataAlvo.getFullYear();
-    let meses = agora.getMonth() - dataAlvo.getMonth() + (12 * anos); // Total de meses passados
-    let mesesCorrigidos = meses % 12; // Ajuste para não ultrapassar 12 meses
 
-    const diaInicial = new Date(agora.getFullYear(), dataAlvo.getMonth(), dataAlvo.getDate());
-    const diasNoAno = Math.floor((agora - diaInicial) / (1000 * 60 * 60 * 24));
-    
+    // Corrigindo a diferença de meses
+    const meses = agora.getMonth() - dataAlvo.getMonth() + (12 * anos);
+    const mesesCorrigidos = meses % 12; // Ajustando para não ultrapassar 12 meses
 
-    // Calculando semanas e dias
+    // Corrigindo a contagem de dias após o cálculo de anos
+    // Ajuste para garantir que ao completar um ano, o número de dias seja 0
+    let diasRestantes = diasTotais % 365; // Pegando os dias que sobraram após a contagem de anos
+    if (diasRestantes === 0 && anos > 0) {
+        diasRestantes = 0; // Se o número de dias restantes for 0 e já tivermos um ano completo, resetamos os dias
+    }
+
+    // Contagem de semanas
     const semanas = Math.floor(diasTotais / 7);
-    const dias = diasTotais % 7;
 
     // Atualiza o conteúdo de cada elemento
     document.getElementById("anos").textContent = anos;
     document.getElementById("meses").textContent = mesesCorrigidos;
     document.getElementById("semanas").textContent = semanas;
-    document.getElementById("dias").textContent = dias;
+    document.getElementById("dias").textContent = diasRestantes;
     document.getElementById("horas").textContent = horas;
     document.getElementById("minutos").textContent = minutos;
     document.getElementById("segundos").textContent = segundos;
     document.getElementById("milissegundos").textContent = milissegundos;
 }, 1000);
-
-
 
 let dataNamoro = new Date("2024-08-17T00:00:00");
 
