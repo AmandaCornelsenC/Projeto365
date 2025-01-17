@@ -5,6 +5,16 @@ setInterval(() => {
     let agora = new Date();
     let diferença = agora - dataInicial; // Calcula o tempo que passou desde a data inicial
 
+    // Calcula anos e meses
+    let anos = agora.getFullYear() - dataInicial.getFullYear();
+    let meses = agora.getMonth() - dataInicial.getMonth();
+
+    // Ajusta anos e meses se necessário
+    if (meses < 0) {
+        anos -= 1;
+        meses += 12;
+    }
+
     // Calcula os valores de milissegundos, segundos, minutos e horas
     const milissegundos = diferença % 1000;
     const totalSegundos = Math.floor(diferença / 1000);
@@ -21,16 +31,7 @@ setInterval(() => {
     const semanas = Math.floor((totalDias % 28) / 7); // Ciclo de 4 semanas (28 dias)
     const dias = (totalDias % 7) + 1; // Dias no ciclo de 1 a 7
 
-    // Calcula anos e meses (para exibição adicional)
-    let anos = agora.getFullYear() - dataInicial.getFullYear();
-    let meses = agora.getMonth() - dataInicial.getMonth();
-
-    if (meses < 0) {
-        anos -= 1;
-        meses += 12;
-    }
-
-    // Ajusta a exibição para garantir que o contador esteja correto
+    // Atualiza os valores no HTML
     document.getElementById("anos").textContent = anos;
     document.getElementById("meses").textContent = meses;
     document.getElementById("semanas").textContent = semanas;
