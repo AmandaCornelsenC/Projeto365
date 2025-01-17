@@ -1,5 +1,5 @@
 // Define a data alvo para 17 de janeiro de 2025, às 00h// Define a data alvo para 17 de janeiro de 2025, às 00h
-let dataAlvo = new Date("2025-01-17T00:00:00");
+let dataAlvo = new Date("2024-01-17T00:00:00");
 
 setInterval(() => {
     let agora = new Date();
