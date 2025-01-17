@@ -30,7 +30,7 @@ setInterval(() => {
         meses += 12;
     }
 
-    // Atualiza os valores no HTML
+    // Ajusta a exibição para garantir que o contador esteja correto
     document.getElementById("anos").textContent = anos;
     document.getElementById("meses").textContent = meses;
     document.getElementById("semanas").textContent = semanas;
@@ -40,10 +40,6 @@ setInterval(() => {
     document.getElementById("segundos").textContent = segundos;
     document.getElementById("milissegundos").textContent = milissegundos;
 }, 10); // Atualiza a cada 10ms para maior precisão visual
-
-
-
-
 
 
 let dataNamoro = new Date("2024-08-17T00:00:00");
