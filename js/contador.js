@@ -1,5 +1,5 @@
-// Define a data alvo para 17 de janeiro de 2025, às 00h// Define a data alvo para 17 de janeiro de 2025, às 00h
-let dataAlvo = new Date("2024-01-17T00:00:00");
+// Define a data alvo para 17 de janeiro de 2025, às 17h
+let dataAlvo = new Date("2025-01-17T17:00:00");
 
 setInterval(() => {
     let agora = new Date();
@@ -20,13 +20,11 @@ setInterval(() => {
     const horas = totalHoras % 24;
 
     // Calcula dias, meses e anos manualmente
-    const dataAtual = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
-    const anos = dataAlvo.getFullYear() - agora.getFullYear();
-
-    // Ajusta meses e dias
+    let anos = dataAlvo.getFullYear() - agora.getFullYear();
     let meses = dataAlvo.getMonth() - agora.getMonth();
     let dias = dataAlvo.getDate() - agora.getDate();
 
+    // Ajusta os dias, meses e anos
     if (dias < 0) {
         meses -= 1;
         const ultimoDiaMesAtual = new Date(agora.getFullYear(), agora.getMonth() + 1, 0).getDate();
@@ -34,6 +32,7 @@ setInterval(() => {
     }
 
     if (meses < 0) {
+        anos -= 1;
         meses += 12;
     }
 
@@ -45,7 +44,8 @@ setInterval(() => {
     document.getElementById("minutos").textContent = minutos;
     document.getElementById("segundos").textContent = segundos;
     document.getElementById("milissegundos").textContent = milissegundos;
-}, 1000);
+}, 10); // Atualiza a cada 10ms para maior precisão visual
+
 
 let dataNamoro = new Date("2024-08-17T00:00:00");
 
