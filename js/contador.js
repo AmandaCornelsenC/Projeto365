@@ -1,4 +1,4 @@
-let dataAlvo = new Date ("2024-01-17T16:00:00")
+let dataAlvo = new Date ("2024-01-17T00:00:00")
 
 setInterval(() => {
     let agora = new Date();
