@@ -1,46 +1,34 @@
-// Define a data inicial para 17 de janeiro de 2024, às 17h
-let dataInicial = new Date("2024-01-17T00:00:00");
+// Definir a data inicial
+const startDate = new Date('2024-01-17T00:00:00');
 
-setInterval(() => {
-    let agora = new Date();
-    let diferença = agora - dataInicial; // Calcula o tempo que passou desde a data inicial
+// Função que atualiza o contador
+function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate; // Diferença em milissegundos
 
-    // Calcula anos e meses
-    let anos = agora.getFullYear() - dataInicial.getFullYear();
-    let meses = agora.getMonth() - dataInicial.getMonth();
+    // Calcular o tempo passado
+    const years = Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000));
+    const months = Math.floor(diff / (30.44 * 24 * 60 * 60 * 1000)) % 12;
+    const weeks = Math.floor(diff / (7 * 24 * 60 * 60 * 1000));
+    const days = Math.floor(diff / (24 * 60 * 60 * 1000)) % 30;
+    const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+    const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
+    const seconds = Math.floor((diff % (60 * 1000)) / 1000);
+    const milliseconds = diff % 1000;
 
-    // Ajusta anos e meses se necessário
-    if (meses < 0) {
-        anos -= 1;
-        meses += 12;
-    }
+    // Atualizar a interface
+    document.getElementById('anos').textContent = years;
+    document.getElementById('meses').textContent = months;
+    document.getElementById('semanas').textContent = weeks;
+    document.getElementById('dias').textContent = days;
+    document.getElementById('horas').textContent = hours;
+    document.getElementById('minutos').textContent = minutes;
+    document.getElementById('segundos').textContent = seconds;
+    document.getElementById('milissegundos').textContent = milliseconds;
+}
 
-    // Calcula os valores de milissegundos, segundos, minutos e horas
-    const milissegundos = diferença % 1000;
-    const totalSegundos = Math.floor(diferença / 1000);
-    const segundos = totalSegundos % 60;
-    const totalMinutos = Math.floor(totalSegundos / 60);
-    const minutos = totalMinutos % 60;
-    const totalHoras = Math.floor(totalMinutos / 60);
-    const horas = totalHoras % 24;
-
-    // Calcula o número total de dias passados
-    const totalDias = Math.floor(diferença / (1000 * 60 * 60 * 24)); // Dias totais desde a data inicial
-
-    // Calcula semanas e dias no ciclo especificado
-    const semanas = Math.floor((totalDias % 28) / 7); // Ciclo de 4 semanas (28 dias)
-    const dias = (totalDias % 7) + 1; // Dias no ciclo de 1 a 7
-
-    // Atualiza os valores no HTML
-    document.getElementById("anos").textContent = anos;
-    document.getElementById("meses").textContent = meses;
-    document.getElementById("semanas").textContent = semanas;
-    document.getElementById("dias").textContent = dias;
-    document.getElementById("horas").textContent = horas;
-    document.getElementById("minutos").textContent = minutos;
-    document.getElementById("segundos").textContent = segundos;
-    document.getElementById("milissegundos").textContent = milissegundos;
-}, 10); // Atualiza a cada 10ms para maior precisão visual
+// Atualizar o contador a cada milissegundo
+setInterval(updateCounter, 1);
 
 
 let dataNamoro = new Date("2024-08-17T00:00:00");
