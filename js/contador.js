@@ -1,35 +1,20 @@
-let dataAlvo = new Date("2024-01-17T00:00:00");
-
 setInterval(() => {
     let agora = new Date();
-    let diferença = agora - dataAlvo; // Diferença em milissegundos
+    let diferença = agora - dataAlvo;
 
     // Cálculo dos valores
     const milissegundos = diferença % 1000;
     const segundos = Math.floor(diferença / 1000) % 60;
     const minutos = Math.floor(diferença / (1000 * 60)) % 60;
     const horas = Math.floor(diferença / (1000 * 60 * 60)) % 24;
-
-    const diasTotais = Math.floor(diferença / (1000 * 60 * 60 * 24)); // Total de dias
-
-    // Calculando anos e meses
-    const anos = agora.getFullYear() - dataAlvo.getFullYear();
-    let meses = agora.getMonth() - dataAlvo.getMonth() + (12 * anos); // Total de meses passados
-    let mesesCorrigidos = meses % 12; // Ajuste para não ultrapassar 12 meses
-
-    // Recalcula os dias para corrigir a contagem de dias
-    let diasNoAno = diasTotais - (365 * anos + Math.floor(anos / 4)); // Subtrai o número de dias dos anos completos, considerando anos bissextos
-    if (agora.getMonth() === 1 && agora.getDate() < 17) { // Se estiver no mês 2 (fevereiro) e antes do dia 17
-        diasNoAno -= 31; // Ajuste se a data de 17/01 não completou ainda
-    }
-
-    // Calculando semanas e dias
-    const semanas = Math.floor(diasTotais / 7);
-    const dias = diasTotais % 7;
+    const dias = Math.floor(diferença / (1000 * 60 * 60 * 24)) % 7;
+    const semanas = Math.floor(diferença / (1000 * 60 * 60 * 24 * 7)) % 4;
+    const meses = Math.floor(diferença / (1000 * 60 * 60 * 24 * 30.44)) % 12; // Aproximação de um mês
+    const anos = Math.floor(diferença / (1000 * 60 * 60 * 24 * 365.25)); // Aproximação de um ano
 
     // Atualiza o conteúdo de cada elemento
     document.getElementById("anos").textContent = anos;
-    document.getElementById("meses").textContent = mesesCorrigidos;
+    document.getElementById("meses").textContent = meses;
     document.getElementById("semanas").textContent = semanas;
     document.getElementById("dias").textContent = dias;
     document.getElementById("horas").textContent = horas;
