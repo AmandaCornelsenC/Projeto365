@@ -37,6 +37,7 @@ setInterval(() => {
     document.getElementById("segundos").textContent = segundos;
     document.getElementById("milissegundos").textContent = milissegundos;
 }, 1000);
+
 let dataNamoro = new Date("2024-08-17T00:00:00");
 
 setInterval(() => {
