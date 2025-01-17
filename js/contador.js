@@ -17,11 +17,9 @@ setInterval(() => {
     let meses = agora.getMonth() - dataAlvo.getMonth() + (12 * anos); // Total de meses passados
     let mesesCorrigidos = meses % 12; // Ajuste para não ultrapassar 12 meses
 
-    // Recalcula os dias para corrigir a contagem de dias
-    let diasNoAno = diasTotais - (365 * anos + Math.floor(anos / 4)); // Subtrai o número de dias dos anos completos, considerando anos bissextos
-    if (agora.getMonth() === 1 && agora.getDate() < 17) { // Se estiver no mês 2 (fevereiro) e antes do dia 17
-        diasNoAno -= 31; // Ajuste se a data de 17/01 não completou ainda
-    }
+    const diaInicial = new Date(agora.getFullYear(), dataAlvo.getMonth(), dataAlvo.getDate());
+    const diasNoAno = Math.floor((agora - diaInicial) / (1000 * 60 * 60 * 24));
+    
 
     // Calculando semanas e dias
     const semanas = Math.floor(diasTotais / 7);
