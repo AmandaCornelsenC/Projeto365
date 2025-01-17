@@ -1,23 +1,27 @@
-let dataAlvo = new Date ("2024-01-17T16:00:00")
+// Define a data alvo para 17 de janeiro de 2025, às 00h
+let dataAlvo = new Date("2025-01-17T00:00:00");
 
 setInterval(() => {
     let agora = new Date();
-    let diferença = agora - dataAlvo;
+    let diferença = dataAlvo - agora;
+
+    // Garante que a diferença não seja negativa (após passar da data alvo)
+    if (diferença < 0) {
+        diferença = 0;
+    }
 
     // Cálculo dos valores
     const milissegundos = diferença % 1000;
     const segundos = Math.floor(diferença / 1000) % 60;
     const minutos = Math.floor(diferença / (1000 * 60)) % 60;
     const horas = Math.floor(diferença / (1000 * 60 * 60)) % 24;
-    const dias = Math.floor(diferença / (1000 * 60 * 60 * 24)) % 7;
-    const semanas = Math.floor(diferença / (1000 * 60 * 60 * 24 * 7)) % 4;
-    const meses = Math.floor(diferença / (1000 * 60 * 60 * 24 * 30.44)) % 12; // Aproximação de um mês
-    const anos = Math.floor(diferença / (1000 * 60 * 60 * 24 * 365.25)); // Aproximação de um ano
+    const dias = Math.floor(diferença / (1000 * 60 * 60 * 24)) % 30; // Aproximação de um mês
+    const meses = Math.floor(diferença / (1000 * 60 * 60 * 24 * 30.44)) % 12; // Aproximação de meses
+    const anos = Math.floor(diferença / (1000 * 60 * 60 * 24 * 365.25)); // Aproximação de anos
 
-    // Atualiza o conteúdo de cada elemento
+    // Atualiza o conteúdo de cada elemento no HTML
     document.getElementById("anos").textContent = anos;
     document.getElementById("meses").textContent = meses;
-    document.getElementById("semanas").textContent = semanas;
     document.getElementById("dias").textContent = dias;
     document.getElementById("horas").textContent = horas;
     document.getElementById("minutos").textContent = minutos;
