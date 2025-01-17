@@ -1,5 +1,5 @@
 // Define a data inicial para 17 de janeiro de 2024, às 17h
-let dataInicial = new Date("2024-01-17T17:00:00");
+let dataInicial = new Date("2024-01-17T00:00:00");
 
 setInterval(() => {
     let agora = new Date();
