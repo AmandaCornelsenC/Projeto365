@@ -1,14 +1,9 @@
-// Define a data alvo para 17 de janeiro de 2025, às 17h
-let dataAlvo = new Date("2025-01-17T17:00:00");
+// Define a data inicial para 17 de janeiro de 2024, às 17h
+let dataInicial = new Date("2024-01-17T17:00:00");
 
 setInterval(() => {
     let agora = new Date();
-    let diferença = dataAlvo - agora;
-
-    // Garante que a diferença não seja negativa (após passar da data alvo)
-    if (diferença < 0) {
-        diferença = 0;
-    }
+    let diferença = agora - dataInicial; // Calcula o tempo que passou desde a data inicial
 
     // Calcula os valores de milissegundos, segundos, minutos e horas
     const milissegundos = diferença % 1000;
@@ -20,15 +15,15 @@ setInterval(() => {
     const horas = totalHoras % 24;
 
     // Calcula dias, meses e anos manualmente
-    let anos = dataAlvo.getFullYear() - agora.getFullYear();
-    let meses = dataAlvo.getMonth() - agora.getMonth();
-    let dias = dataAlvo.getDate() - agora.getDate();
+    let anos = agora.getFullYear() - dataInicial.getFullYear();
+    let meses = agora.getMonth() - dataInicial.getMonth();
+    let dias = agora.getDate() - dataInicial.getDate();
 
     // Ajusta os dias, meses e anos
     if (dias < 0) {
         meses -= 1;
-        const ultimoDiaMesAtual = new Date(agora.getFullYear(), agora.getMonth() + 1, 0).getDate();
-        dias += ultimoDiaMesAtual;
+        const ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+        dias += ultimoDiaMesAnterior;
     }
 
     if (meses < 0) {
