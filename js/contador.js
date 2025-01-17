@@ -6,11 +6,20 @@ function updateCounter() {
     const now = new Date();
     const diff = now - startDate; // Diferença em milissegundos
 
-    // Calcular o tempo passado
+    // Calcular os anos
     const years = Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000));
-    const months = Math.floor(diff / (30.44 * 24 * 60 * 60 * 1000)) % 12;
-    const weeks = Math.floor(diff / (7 * 24 * 60 * 60 * 1000));
-    const days = Math.floor(diff / (24 * 60 * 60 * 1000)) % 30;
+
+    // Calcular os meses de forma precisa
+    const months = new Date(now - startDate).getMonth();
+
+    // Calcular o número de dias totais
+    const days = Math.floor(diff / (24 * 60 * 60 * 1000));
+
+    // Calcular as semanas
+    const weeks = Math.floor(days / 7);
+    const remainingDays = days % 7;  // Dias restantes após calcular as semanas
+
+    // Calcular horas, minutos, segundos e milissegundos
     const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
     const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
     const seconds = Math.floor((diff % (60 * 1000)) / 1000);
@@ -20,7 +29,7 @@ function updateCounter() {
     document.getElementById('anos').textContent = years;
     document.getElementById('meses').textContent = months;
     document.getElementById('semanas').textContent = weeks;
-    document.getElementById('dias').textContent = days;
+    document.getElementById('dias').textContent = remainingDays;
     document.getElementById('horas').textContent = hours;
     document.getElementById('minutos').textContent = minutes;
     document.getElementById('segundos').textContent = seconds;
