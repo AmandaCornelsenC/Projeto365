@@ -12,24 +12,16 @@ setInterval(() => {
 
     const diasTotais = Math.floor(diferença / (1000 * 60 * 60 * 24)); // Total de dias
 
-    // Calculando anos e meses
+    // Calculando anos
     const anos = agora.getFullYear() - dataAlvo.getFullYear();
 
-    // Calculando o número total de meses
+    // Calculando meses
     const meses = agora.getMonth() - dataAlvo.getMonth() + (12 * anos);
     const mesesCorrigidos = meses % 12; // Ajustando para não ultrapassar 12 meses
 
-    // Ajustando a contagem de dias para "0" após completar 1 ano
-    let diasRestantes = diasTotais - (365 * anos); // Subtrai os dias dos anos completos
-
-    // Caso seja um ano bissexto e já tenha completado um ano, adicionamos 1 dia
-    if ((anos % 4 === 0) && (agora.getMonth() > 1 || (agora.getMonth() === 1 && agora.getDate() >= 17))) {
-        diasRestantes++;
-    }
-
-    // Calculando semanas
+    // Calculando semanas e dias
     const semanas = Math.floor(diasTotais / 7);
-    const diasNoMes = diasTotais % 7; // Dias restantes no mês atual
+    const diasRestantes = diasTotais % 7; // Pegando os dias restantes
 
     // Atualiza o conteúdo de cada elemento
     document.getElementById("anos").textContent = anos;
@@ -41,6 +33,7 @@ setInterval(() => {
     document.getElementById("segundos").textContent = segundos;
     document.getElementById("milissegundos").textContent = milissegundos;
 }, 1000);
+
 
 let dataNamoro = new Date("2024-08-17T00:00:00");
 
