@@ -31,22 +31,26 @@ setInterval(() => {
         meses += 12;
     }
 
-    // Calcula semanas com base no total de dias acumulados
+    // Calcula o número total de dias passados
     const dataInicialSemHoras = new Date(dataInicial.getFullYear(), dataInicial.getMonth(), dataInicial.getDate());
     const dataAtualSemHoras = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
     const totalDias = Math.floor((dataAtualSemHoras - dataInicialSemHoras) / (1000 * 60 * 60 * 24)); // Dias totais
-    const semanas = Math.floor(totalDias / 7); // Semanas completas passadas
+
+    // Calcula semanas completas e ajusta os dias restantes
+    const semanas = Math.floor(totalDias / 7);
+    const diasRestantes = totalDias % 7; // Dias restantes após as semanas completas
 
     // Atualiza os valores no HTML
     document.getElementById("anos").textContent = anos;
     document.getElementById("meses").textContent = meses;
     document.getElementById("semanas").textContent = semanas;
-    document.getElementById("dias").textContent = dias;
+    document.getElementById("dias").textContent = diasRestantes; // Dias restantes após semanas completas
     document.getElementById("horas").textContent = horas;
     document.getElementById("minutos").textContent = minutos;
     document.getElementById("segundos").textContent = segundos;
     document.getElementById("milissegundos").textContent = milissegundos;
 }, 10); // Atualiza a cada 10ms para maior precisão visual
+
 
 
 
