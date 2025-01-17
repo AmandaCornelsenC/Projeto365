@@ -12,22 +12,24 @@ setInterval(() => {
 
     const diasTotais = Math.floor(diferença / (1000 * 60 * 60 * 24)); // Total de dias
 
-    // Calculando anos
+    // Calculando anos e meses
     const anos = agora.getFullYear() - dataAlvo.getFullYear();
 
-    // Corrigindo a diferença de meses
+    // Calculando o número total de meses
     const meses = agora.getMonth() - dataAlvo.getMonth() + (12 * anos);
     const mesesCorrigidos = meses % 12; // Ajustando para não ultrapassar 12 meses
 
-    // Corrigindo a contagem de dias após o cálculo de anos
-    // Ajuste para garantir que ao completar um ano, o número de dias seja 0
-    let diasRestantes = diasTotais % 365; // Pegando os dias que sobraram após a contagem de anos
-    if (diasRestantes === 0 && anos > 0) {
-        diasRestantes = 0; // Se o número de dias restantes for 0 e já tivermos um ano completo, resetamos os dias
+    // Ajustando a contagem de dias para "0" após completar 1 ano
+    let diasRestantes = diasTotais - (365 * anos); // Subtrai os dias dos anos completos
+
+    // Caso seja um ano bissexto e já tenha completado um ano, adicionamos 1 dia
+    if ((anos % 4 === 0) && (agora.getMonth() > 1 || (agora.getMonth() === 1 && agora.getDate() >= 17))) {
+        diasRestantes++;
     }
 
-    // Contagem de semanas
+    // Calculando semanas
     const semanas = Math.floor(diasTotais / 7);
+    const diasNoMes = diasTotais % 7; // Dias restantes no mês atual
 
     // Atualiza o conteúdo de cada elemento
     document.getElementById("anos").textContent = anos;
