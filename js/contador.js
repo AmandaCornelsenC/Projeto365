@@ -14,7 +14,14 @@ setInterval(() => {
     const totalHoras = Math.floor(totalMinutos / 60);
     const horas = totalHoras % 24;
 
-    // Calcula anos, meses e dias passados
+    // Calcula o número total de dias passados
+    const totalDias = Math.floor(diferença / (1000 * 60 * 60 * 24));
+
+    // Calcula semanas completas e dias restantes
+    const semanas = Math.floor(totalDias / 7); // Total de semanas completas
+    const diasRestantes = totalDias % 7; // Dias restantes após semanas completas
+
+    // Calcula anos, meses e dias
     let anos = agora.getFullYear() - dataInicial.getFullYear();
     let meses = agora.getMonth() - dataInicial.getMonth();
     let dias = agora.getDate() - dataInicial.getDate();
@@ -31,15 +38,6 @@ setInterval(() => {
         meses += 12;
     }
 
-    // Calcula o número total de dias passados
-    const dataInicialSemHoras = new Date(dataInicial.getFullYear(), dataInicial.getMonth(), dataInicial.getDate());
-    const dataAtualSemHoras = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
-    const totalDias = Math.floor((dataAtualSemHoras - dataInicialSemHoras) / (1000 * 60 * 60 * 24)); // Dias totais
-
-    // Calcula semanas completas e ajusta os dias restantes
-    const semanas = Math.floor(totalDias / 7);
-    const diasRestantes = totalDias % 7; // Dias restantes após as semanas completas
-
     // Atualiza os valores no HTML
     document.getElementById("anos").textContent = anos;
     document.getElementById("meses").textContent = meses;
@@ -50,6 +48,7 @@ setInterval(() => {
     document.getElementById("segundos").textContent = segundos;
     document.getElementById("milissegundos").textContent = milissegundos;
 }, 10); // Atualiza a cada 10ms para maior precisão visual
+
 
 
 
