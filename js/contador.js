@@ -1,3 +1,5 @@
+let dataAlvo = new Date("2024-01-17T17:10:00);
+
 setInterval(() => {
     let agora = new Date();
     let diferença = agora - dataAlvo;
